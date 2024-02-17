@@ -2,6 +2,8 @@ import tkinter as tk
 import subprocess
 import customtkinter
 from PIL import Image
+from tkinter import messagebox
+import tkinter.messagebox
 customtkinter.set_appearance_mode("System")
 customtkinter.set_default_color_theme("blue")
 
@@ -52,7 +54,15 @@ class App(customtkinter.CTk):
         self.scaling_optionemenu = customtkinter.CTkOptionMenu(self.sidebar_frame, values=["80%", "90%", "100%", "110%", "120%"],
                                                                command=self.change_scaling_event)
         self.scaling_optionemenu.grid(row=8, column=0, padx=20, pady=(10, 20))
+        self.about_button = customtkinter.CTkButton(self.sidebar_frame, command=self.show_about_dialog, text="Acerca de")
+        self.about_button.grid(row=9, column=0, padx=20, pady=10)
 
+        # Barra de estado para mensajes informativos
+        self.status_bar = customtkinter.CTkLabel(self, text="", anchor="w")
+        self.status_bar.grid(row=4, column=0, columnspan=3, padx=20, pady=(0, 10), sticky="we")
+        self.main_button_1 = customtkinter.CTkButton(master=self, fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"),
+                                                     text="Saludo",command=self.show_greeting_popup)
+        self.main_button_1.grid(row=3, column=3, padx=(20, 20), pady=(20, 20), sticky="nsew")
         self.main_frame = customtkinter.CTkFrame(self)
         self.main_frame.grid(row=0, column=1, rowspan=4, columnspan=3, padx=20, pady=20, sticky="nsew")
         self.main_frame.grid_forget()
@@ -167,7 +177,15 @@ class App(customtkinter.CTk):
     def change_scaling_event(self, new_scaling: str):
         new_scaling_float = int(new_scaling.replace("%", "")) / 100
         customtkinter.set_widget_scaling(new_scaling_float)
+    def show_about_dialog(self):
+        about_text = "Proyecto Final\nVersión 1.0\nDesarrollado por Benjamin Villagran"
+        messagebox.showinfo("Acerca de", about_text)
+    def show_greeting_popup(self):
+        tkinter.messagebox.showinfo("Saludo", "¡Hola! Gracias por usar esta aplicación.")
+    def mostrar_informacion(self):
+        informacion = "Bienvenido a la aplicación. Aquí puedes encontrar diferentes módulos y herramientas para tu uso diario.\n\nEste es un ejemplo de información."
 
+        messagebox.showinfo("Información", informacion)
 if __name__ == "__main__":
     app = App()
     app.mainloop()
