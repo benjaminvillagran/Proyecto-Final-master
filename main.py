@@ -143,6 +143,11 @@ class App(customtkinter.CTk):
             subprocess.run(["python","VIBORITA/viborita.py"])
         except Exception as hola:
             print("error al abrir viborita")
+    def abrir_musica(self):
+        try:
+            subprocess.run(["python","Musica/musica.py"])
+        except Exception as hola:
+            print("error al abrir viborita")
     # Funciones para abrir módulos específicos
     def abrir_modulo_entretenimiento(self):
         self.button_juego = customtkinter.CTkButton(self.main_frame, text="Juego", command=self.abrir_viborita)
@@ -156,7 +161,9 @@ class App(customtkinter.CTk):
 
         self.button_piedra_papel_tijera = customtkinter.CTkButton(self.main_frame, text="Piedra papel y Tijera", command=self.abrir_piedrapapeltijera)
         self.button_piedra_papel_tijera.grid(row=3, column=0, pady=20)
-
+        
+        self.button_musica = customtkinter.CTkButton(self.main_frame, text="Musica", command=self.abrir_musica)
+        self.button_musica.grid(row=0, column=1, pady=20)
         self.button_volver = customtkinter.CTkButton(self.main_frame, text="Volver", command=self.volver_al_menu_principal)
         self.button_volver.grid(row=4, column=0, pady=20)
         self.main_frame.grid(row=0, column=1, rowspan=4, columnspan=3, padx=20, pady=20, sticky="nsew")
