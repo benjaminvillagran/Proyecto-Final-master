@@ -2,6 +2,7 @@ import customtkinter as ctk
 import tkinterDnD
 import secrets
 import string
+from tkinter import filedialog 
 from tkinter import messagebox
 import os
 
@@ -12,13 +13,23 @@ def guardar_contraseña():
         return
     
     try:
-        nombre_archivo = "contraseñas_guardadas.txt"
+        # Seleccionar la ubicación y el nombre del archivo usando un cuadro de diálogo
+        nombre_archivo = filedialog.asksaveasfilename(
+            defaultextension=".txt",
+            filetypes=[("Archivos de texto", "*.txt"), ("Todos los archivos", "*.*")],
+            title="Guardar Contraseña"
+        )
+        
+        if not nombre_archivo:
+            return  # El usuario canceló la operación
+        
         with open(nombre_archivo, "a") as archivo:
             archivo.write(contraseña + "\n")
         
         messagebox.showinfo("Éxito", "Contraseña guardada correctamente.")
     except Exception as e:
         messagebox.showerror("Error", f"Error al intentar guardar la contraseña:\n{str(e)}")
+
         
 def generar_contraseña():
     try:
