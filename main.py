@@ -138,10 +138,14 @@ class App(customtkinter.CTk):
             subprocess.run(["python", "calendario/calendario.py"])
         except Exception as e:
             print("error al abrir calendario")
-
+    def abrir_viborita(self):
+        try:
+            subprocess.run(["python","VIBORITA/viborita.py"])
+        except Exception as hola:
+            print("error al abrir viborita")
     # Funciones para abrir módulos específicos
     def abrir_modulo_entretenimiento(self):
-        self.button_juego = customtkinter.CTkButton(self.main_frame, text="Juego", command=self.abrir_ahorcado)
+        self.button_juego = customtkinter.CTkButton(self.main_frame, text="Juego", command=self.abrir_viborita)
         self.button_juego.grid(row=0, column=0, pady=20)
 
         self.button_tv = customtkinter.CTkButton(self.main_frame, text="TV", command=self.abrir_tv)
