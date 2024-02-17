@@ -4,3 +4,5 @@ pip install python-tkdnd
 pip install pillow 
 pip install secrets 
 pip install strings
+pip install plyer
+pip install tkcalendar

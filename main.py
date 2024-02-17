@@ -107,6 +107,11 @@ class App(customtkinter.CTk):
             subprocess.run(["python","EMAIL/enviador_de_emails.py"])
         except Exception as e:
             print("Error")
+    def abrir_calendario(self):
+        try:
+            subprocess.run(["python","calendario/calendario.py"])
+        except Exception as e:
+            print("error al abrir calendario")
     def abrir_modulo_entretenimiento(self):
         self.button_juego = customtkinter.CTkButton(self.main_frame, text="Juego", command=self.abrir_ahorcado)
         self.button_juego.grid(row=0, column=0, pady=20)
@@ -139,12 +144,14 @@ class App(customtkinter.CTk):
         
         self.button_impuesto = customtkinter.CTkButton(self.main_frame, text="Calculadora de impuestos", command=self.abrir_impuesto)
         self.button_impuesto.grid(row=0, column=1, pady=20)
+        self.button_calendario = customtkinter.CTkButton(self.main_frame, text="Calendario", command=self.abrir_calendario)
+        self.button_calendario.grid(row=0, column=2, pady=20)
     
         self.button_email    = customtkinter.CTkButton(self.main_frame, text="Enviar Email", command=self.enviar_email)
         self.button_email.grid(row=1,column=1,pady=20)
 
         self.button_volver = customtkinter.CTkButton(self.main_frame, text="Volver", command=self.volver_al_menu_principal)
-        self.button_volver.grid(row=4, column=0, pady=20)
+        self.button_volver.grid(row=5, column=0, pady=20)
         self.main_frame.grid(row=0, column=1, rowspan=4, columnspan=3, padx=20, pady=20, sticky="nsew")
 
 
