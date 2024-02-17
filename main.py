@@ -59,9 +59,15 @@ class App(customtkinter.CTk):
         self.appearance_mode_optionemenu.set("Dark")
         self.scaling_optionemenu.set("100%")
 
-    def abrir_juego(self):
+    def abrir_ahorcado(self):
         try:
-            subprocess.run(["python", "VIBORITA/viborita.py"])
+            subprocess.run(["python", "ahorcado/ahorcado.py"])
+        except Exception as e:
+            print("Error al abrir el juego:", e)
+
+    def abrir_piedrapapeltijera(self):
+        try:
+            subprocess.run(["python", "PIEDRA PAPEL TIJERA/jueguito.py"])
         except Exception as e:
             print("Error al abrir el juego:", e)
     
@@ -102,13 +108,20 @@ class App(customtkinter.CTk):
         except Exception as e:
             print("Error")
     def abrir_modulo_entretenimiento(self):
-        self.button_juego = customtkinter.CTkButton(self.main_frame, text="Juego", command=self.abrir_juego)
+        self.button_juego = customtkinter.CTkButton(self.main_frame, text="Juego", command=self.abrir_ahorcado)
         self.button_juego.grid(row=0, column=0, pady=20)
 
         self.button_tv = customtkinter.CTkButton(self.main_frame, text="TV", command=self.abrir_tv)
         self.button_tv.grid(row=1, column=0, pady=20)
+        
+        self.button_ahorcado = customtkinter.CTkButton(self.main_frame, text="Ahorcado", command=self.abrir_ahorcado)
+        self.button_ahorcado.grid(row=2, column=0, pady=20)
+
+        self.button_piedra_papel_tijera = customtkinter.CTkButton(self.main_frame, text="Piedra papel y Tijera", command=self.abrir_piedrapapeltijera)
+        self.button_piedra_papel_tijera.grid(row=3, column=0, pady=20)     
+
         self.button_volver = customtkinter.CTkButton(self.main_frame, text="Volver", command=self.volver_al_menu_principal)
-        self.button_volver.grid(row=3, column=0, pady=20)
+        self.button_volver.grid(row=4, column=0, pady=20)
         self.main_frame.grid(row=0, column=1, rowspan=4, columnspan=3, padx=20, pady=20, sticky="nsew")
 
     def abrir_modulo_utilidades(self):
