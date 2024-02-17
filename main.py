@@ -69,11 +69,6 @@ class App(customtkinter.CTk):
         self.status_bar = customtkinter.CTkLabel(self, text="", anchor="w")
         self.status_bar.grid(row=4, column=0, columnspan=3, padx=20, pady=(0, 10), sticky="we")
 
-        # Botón de saludo en la esquina superior derecha
-        self.main_button_1 = customtkinter.CTkButton(master=self, fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"),
-                                                     text="Saludo", command=self.show_greeting_popup)
-        self.main_button_1.grid(row=3, column=3, padx=(20, 20), pady=(20, 20), sticky="nsew")
-
         # Marco principal para los diferentes módulos
         self.main_frame = customtkinter.CTkFrame(self)
         self.main_frame.grid(row=0, column=1, rowspan=4, columnspan=3, padx=20, pady=20, sticky="nsew")
