@@ -1,15 +1,15 @@
-import tkinter as tk
-from tkinter import messagebox
-import random
-from PIL import Image, ImageTk
+import tkinter as tk  # Importa el módulo tkinter con el alias tk.
+from tkinter import messagebox  # Importa la función messagebox del módulo tkinter.
+import random  # Importa el módulo random para generar números aleatorios.
+from PIL import Image, ImageTk  # Importa las clases Image y ImageTk del módulo PIL.
 
 class PiedraPapelTijeras:
     def __init__(self, master):
         self.master = master
-        self.master.title("Piedra, Papel, Tijeras")
+        self.master.title("Piedra, Papel, Tijeras")  # Establece el título de la ventana.
 
-        self.opciones = ["Piedra", "Papel", "Tijeras"]
-        self.resultados = []
+        self.opciones = ["Piedra", "Papel", "Tijeras"]  # Lista de opciones disponibles.
+        self.resultados = []  # Lista para almacenar resultados de juegos anteriores.
 
         self.etiqueta = tk.Label(self.master, text="Elige una opción:", font=("Helvetica", 16, "bold"))
         self.etiqueta.pack(pady=20)
@@ -29,14 +29,14 @@ class PiedraPapelTijeras:
         self.actualizar_resultados()
 
     def jugar(self, eleccion_usuario):
-        eleccion_computadora = random.choice(self.opciones)
+        eleccion_computadora = random.choice(self.opciones)  # Obtiene una elección aleatoria de la computadora.
 
         resultado = self.obtener_resultado(eleccion_usuario, eleccion_computadora)
 
         mensaje = f"Elegiste {eleccion_usuario}\nLa computadora eligió {eleccion_computadora}\nResultado: {resultado}"
 
-        self.resultados.append(mensaje)
-        self.actualizar_resultados()
+        self.resultados.append(mensaje)  # Agrega el mensaje del resultado a la lista.
+        self.actualizar_resultados()  # Actualiza la visualización de los resultados.
 
     def obtener_resultado(self, eleccion_usuario, eleccion_computadora):
         if eleccion_usuario == eleccion_computadora:
@@ -51,13 +51,13 @@ class PiedraPapelTijeras:
             return "¡Perdiste!"
 
     def actualizar_resultados(self):
-        self.resultado_texto.config(state=tk.NORMAL)
-        self.resultado_texto.delete(1.0, tk.END)
+        self.resultado_texto.config(state=tk.NORMAL)  # Configura el estado del texto como normal para editar.
+        self.resultado_texto.delete(1.0, tk.END)  # Borra el contenido actual del texto.
         for resultado in self.resultados:
-            self.resultado_texto.insert(tk.END, resultado + "\n")
-        self.resultado_texto.config(state=tk.DISABLED)
+            self.resultado_texto.insert(tk.END, resultado + "\n")  # Inserta cada resultado en el texto.
+        self.resultado_texto.config(state=tk.DISABLED)  # Configura el estado del texto como deshabilitado.
 
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = PiedraPapelTijeras(root)
-    root.mainloop()
+    root = tk.Tk()  # Crea la instancia principal de Tkinter.
+    app = PiedraPapelTijeras(root)  # Crea una instancia de la aplicación PiedraPapelTijeras.
+    root.mainloop()  # Inicia el bucle principal de la interfaz gráfica.

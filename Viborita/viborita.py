@@ -1,42 +1,44 @@
-import pygame
-import random
-import time
-from PIL import ImageColor as IC
+import pygame  # Biblioteca para el desarrollo de videojuegos
+import random  # Biblioteca para la generación de números aleatorios
+import time  # Biblioteca para el manejo del tiempo
+from PIL import ImageColor as IC  # Biblioteca para manipulación de imágenes y colores
 
+# Inicializa el motor de juegos de Pygame
 pygame.init()
 
+# Configuración de la ventana del juego
 width = 900
 height = 700
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Snake")
 clock = pygame.time.Clock()
 
+# Listas y diccionarios para el juego
 snakelist = []
 odict = {"left": (20, 0), "right": (-20, 0), "up": (0, 20),
          "down": (0, -20), "crashed": (0, 0)}
 oodict = {"left": "right", "right": "left",
           "up": "down", "down": "up", "crashed": "crashed"}
 
-
+# Función para convertir nombre de color a tupla de RGB
 def col(colour):
     return IC.getrgb(colour)
 
-
+# Función para crear objetos de texto en Pygame
 def text_objects(text, font, colour, rotation=None):
     textSurface = font.render(text, True, col(colour))
-    if rotation != None:
+    if rotation is not None:
         textSurface = pygame.transform.rotate(textSurface, rotation)
     return textSurface, textSurface.get_rect()
 
-
+# Función para mostrar mensajes en la pantalla
 def message_display(text, font, fontsize, colour, x, rotation=None):
     largeText = pygame.font.SysFont(font, fontsize)
     TextSurf, TextRect = text_objects(text, largeText, colour, rotation)
     TextRect.center = (int((width/2)), int(x))
-
     screen.blit(TextSurf, TextRect)
 
-
+# Función para crear botones en Pygame
 def button(msg, shape, x, y, w, h, ac, ic, font, fontsize, action=None):
     smallText = pygame.font.SysFont(font, fontsize)
     textSurf, textRect = text_objects(msg, smallText, ic)
@@ -44,10 +46,11 @@ def button(msg, shape, x, y, w, h, ac, ic, font, fontsize, action=None):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
 
+    # Verifica si el mouse está sobre el botón
     if shape == "Rect":
-        if pygame.draw.rect(screen, col(ic), (x, y, w, h)).collidepoint(mouse[0]-1, mouse[1]-1) == True:
+        if pygame.draw.rect(screen, col(ic), (x, y, w, h)).collidepoint(mouse[0]-1, mouse[1]-1):
             pygame.draw.rect(screen, col(ac), (x, y, w, h))
-            if click[0] == 1 and action != None:
+            if click[0] == 1 and action is not None:
                 time.sleep(0.1)
                 action()
         else:
@@ -55,11 +58,10 @@ def button(msg, shape, x, y, w, h, ac, ic, font, fontsize, action=None):
             smallText = pygame.font.SysFont(font, fontsize)
             textSurf, textRect = text_objects(msg, smallText, ac)
             textRect.center = ((x+(w/2)), (y+(h/2)))
-
-    if shape == "Circle":
-        if pygame.draw.circle(screen, col(ic), (x, y), w).collidepoint(mouse[0]-1, mouse[1]-1) == True:
+    elif shape == "Circle":
+        if pygame.draw.circle(screen, col(ic), (x, y), w).collidepoint(mouse[0]-1, mouse[1]-1):
             pygame.draw.circle(screen, col(ac), (x, y), w)
-            if click[0] == 1 and action != None:
+            if click[0] == 1 and action is not None:
                 time.sleep(0.1)
                 action()
         else:
@@ -67,14 +69,13 @@ def button(msg, shape, x, y, w, h, ac, ic, font, fontsize, action=None):
             smallText = pygame.font.SysFont(font, fontsize)
             textSurf, textRect = text_objects(msg, smallText, ac)
             textRect.center = ((x+(w/2)), (y+(h/2)))
-
     screen.blit(textSurf, textRect)
 
-
+# Función para dibujar un módulo de la serpiente en la pantalla
 def snake_module(x, y, colour):
     pygame.draw.rect(screen, col(colour), (x, y, 20, 20))
 
-
+# Función para generar comida para la serpiente
 def snake_food():
     random.seed()
     foodx = random.randrange(10, 891, 20)
@@ -84,7 +85,7 @@ def snake_food():
     else:
         return (foodx, foody)
 
-
+# Pantalla de inicio del juego
 def game_startscreen():
     start = True
     while start:
@@ -93,6 +94,7 @@ def game_startscreen():
                 game_quit()
         screen.fill(col("white"))
 
+        # Muestra el título del juego y los botones
         message_display("SNAKE", "ArcadeClassic", 150, "black", 180)
         button("Play >", "Rect", 250, 300, 400, 100,
                "lime", "green", "FFFForward", 45, game_loop)
@@ -103,7 +105,7 @@ def game_startscreen():
         pygame.display.update()
         clock.tick(15)
 
-
+# Pantalla de instrucciones del juego
 def instructions():
     instruct = True
     while instruct:
@@ -112,6 +114,7 @@ def instructions():
             if event.type == pygame.QUIT:
                 game_quit()
 
+        # Muestra las instrucciones y botón de regreso
         message_display("Instructions", "FFFForward", 60, "black", 130)
         message_display("1. Use the arrow keys or the",
                         "FFFForward", 30, "black", 220)
@@ -132,7 +135,7 @@ def instructions():
         pygame.display.update()
         clock.tick(15)
 
-
+# Función principal del juego
 def game_loop():
     game = True
     foodeaten = True
@@ -234,7 +237,7 @@ def game_loop():
         pygame.display.update()
         clock.tick(12)
 
-
+# Pantalla de fin de juego
 def game_crash():
     maxfont = 140
     font = 0
@@ -256,10 +259,10 @@ def game_crash():
         pygame.display.update()
         clock.tick(60)
 
-
+# Función para salir del juego
 def game_quit():
     pygame.quit()
     quit()
 
-
+# Inicia la pantalla de inicio del juego
 game_startscreen()

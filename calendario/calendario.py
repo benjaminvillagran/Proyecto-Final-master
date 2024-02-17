@@ -1,9 +1,9 @@
-import tkinter as tk
-from tkinter import ttk, messagebox, filedialog
-from tkinterdnd2 import TkinterDnD, DND_FILES
-from plyer import notification
-from tkcalendar import Calendar
-from ttkthemes import ThemedTk
+import tkinter as tk  # Importa la biblioteca tkinter con el alias 'tk'.
+from tkinter import ttk, messagebox, filedialog  # Importa clases específicas de tkinter.
+from tkinterdnd2 import TkinterDnD, DND_FILES  # Importa clases para manejar arrastrar y soltar.
+from plyer import notification  # Importa la biblioteca plyer para notificaciones.
+from tkcalendar import Calendar  # Importa la clase Calendar de la biblioteca tkcalendar.
+from ttkthemes import ThemedTk  # Importa la clase ThemedTk de la biblioteca ttkthemes.
 
 class CalendarioApp:
     def __init__(self, master):
@@ -125,6 +125,6 @@ class CalendarioApp:
             messagebox.showerror("Error", f"Error al exportar eventos:\n{str(e)}")
 
 if __name__ == "__main__":
-    root = ThemedTk(theme="equilux")
-    app = CalendarioApp(root)
-    root.mainloop()
+    root = ThemedTk(theme="equilux")  # Crea una instancia de ThemedTk con el tema "equilux".
+    app = CalendarioApp(root)  # Crea una instancia de la aplicación CalendarioApp.
+    root.mainloop()  # Inicia el bucle principal de la interfaz gráfica.
