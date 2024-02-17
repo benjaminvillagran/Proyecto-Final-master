@@ -7,7 +7,7 @@ class Ahorcado:
         self.master = master  # Inicializa la ventana principal.
         self.master.title("Ahorcado")  # Establece el título de la ventana.
 
-        self.palabras = ["python", "programacion", "ahorcado", "juego", "tkinter"]  # Lista de palabras posibles.
+        self.palabras = ["python", "paraplegico", "ahorcado", "juego", "tkinter"]  # Lista de palabras posibles.
         self.palabra_secreta = ""  # Inicializa la palabra secreta.
         self.palabra_mostrada = []  # Inicializa la lista de letras mostradas.
         self.intentos_restantes = 6  # Número de intentos permitidos.
